@@ -1,0 +1,29 @@
+import setuptools
+
+with open("README.md", "r", encoding="utf-8") as f:
+    long_description = f.read()
+
+__version__ = "0.0.0"
+
+REPO_NAME = "lax-model"
+AUTHOR_USER_NAME = "nkofficial-1005"
+SRC_REPO = "laxProject"
+AUTHOR_EMAIL = "nikita.datascience@gmail.com"
+
+#This pipeline is looking up for the constructor files (_init_) and install it as the 
+# local package such as laxProject.components._init_. Mention -e. in requirements for it to pickup this pipeline.
+setuptools.setup(
+    name=SRC_REPO,
+    version=__version__,
+    author=AUTHOR_USER_NAME,
+    author_email=AUTHOR_EMAIL,
+    description="Lax AI/ML project.",
+    long_description=long_description,
+    long_description_content="text/markdown",
+    url=f"https://github.com/{AUTHOR_USER_NAME}/{REPO_NAME}",
+    project_urls={
+        "Bug Tracker": f"https://github.com/{AUTHOR_USER_NAME}/{REPO_NAME}/issues",
+    },
+    package_dir={"": "src"},
+    packages=setuptools.find_packages(where="src")
+)

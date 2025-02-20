@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 import logging
 
-#This will give the logs at a specific time with error or output message
+#This will give the infromation logs at a specific time with error or output message
 logging.basicConfig(level=logging.INFO, format='[%(asctime)s]: %(message)s:')
 
 #This is the source folder
