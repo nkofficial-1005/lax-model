@@ -26,14 +26,20 @@ def read_yaml(path_to_yaml: Path) -> ConfigBox:
         ConfigBox: ConfigBox type
     """
     try:
-        with open(path_to_yaml) as yaml_file:
+        with open(path_to_yaml, "r") as yaml_file:
             content = yaml.safe_load(yaml_file)
-            logger.info(f"yaml file: {path_to_yaml} loaded successfully")
+            if content is None:
+                raise ValueError("yaml file is empty")
+            logger.info(f"YAML file: {path_to_yaml} loaded successfully")
             return ConfigBox(content)
-    except BoxValueError:
-        raise ValueError("yaml file is empty")
-    except Exception as e:
-        raise e
+    except BoxValueError as e:
+        raise ValueError(f"Error creating ConfigBox from YAML content: {e}")
+    #         logger.info(f"yaml file: {path_to_yaml} loaded successfully")
+    #         return ConfigBox(content)
+    # except BoxValueError:
+    #     raise ValueError("yaml file is empty")
+    # except Exception as e:
+    #     raise e
     
 
 @ensure_annotations
