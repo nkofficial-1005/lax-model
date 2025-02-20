@@ -11,3 +11,68 @@
 7. Update the pipeline (training & prediction pipeline)
 8. Update the main.py
 9. Update the app.py
+
+# How to run?
+### STEPS:
+
+Clone the repository
+
+```bash
+https://github.com/nkofficial-1005/lax-model
+```
+### STEP 01- Create a conda environment after opening the repository
+
+```bash
+python -m venv mlproj
+```
+
+```bash
+mlproj\Scripts\activate
+```
+
+
+### STEP 02- install the requirements
+```bash
+pip install -r requirements.txt
+```
+
+
+```bash
+# Finally run the following command
+python app.py
+```
+
+Now,
+```bash
+open up you local host and port
+```
+
+
+
+## MLflow
+
+[Documentation](https://mlflow.org/docs/latest/index.html)
+
+
+##### cmd
+- mlflow ui
+
+### dagshub
+[dagshub](https://dagshub.com/)
+
+MLFLOW_TRACKING_URI=https://dagshub.com/nkofficial-1005/lax-model.mlflow \
+MLFLOW_TRACKING_USERNAME=nkofficial-1005 \
+MLFLOW_TRACKING_PASSWORD=qTWY73YLXhan \
+python script.py
+
+Run this to export as env variables:
+
+```bash
+
+set MLFLOW_TRACKING_URI=https://dagshub.com/nkofficial-1005/lax-model.mlflow
+
+set MLFLOW_TRACKING_USERNAME=nkofficial-1005 
+
+set MLFLOW_TRACKING_PASSWORD=qTWY73YLXhan
+
+```
