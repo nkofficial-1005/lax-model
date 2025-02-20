@@ -138,11 +138,21 @@ set MLFLOW_TRACKING_PASSWORD=Your-MlFlow-Password
 	newgrp docker #applies the new group membership immediately. Alternatively, you can log out and back in.
 
     docker --version #check the version of the docker service running.
+
+    sudo systemctl status docker #check docker socket status (active or inactive)
+
+    sudo systemctl start docker #If Docker is not active, start it with this
+
+    sudo systemctl enable docker #Enable Docker to Start on Boot
+
+    groups ec2-user #verify user permissions to see if docker is included
 	
 ## 6. Configure EC2 as self-hosted runner:
     setting>actions>runner>new self hosted runner> choose os> then run command one by one.
     
-    Here we are connecting github with the AWS EC2 instance. So, whenever updating the code to github, the AWS EC2 instance code would be updated along with the deployment.
+    Here we are connecting github with the AWS EC2 instance. So, whenever updating the code to github, the AWS EC2 instance code would be updated along with the deployment. Setup only the runner-name as self-hosted.
+
+    To restart run this command: ./run.sh
 
 
 ## 7. Setup github secrets:
