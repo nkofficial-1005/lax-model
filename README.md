@@ -154,6 +154,20 @@ set MLFLOW_TRACKING_PASSWORD=Your-MlFlow-Password
 
     To restart run this command: ./run.sh
 
+    Rerun the EC2 instance as follows:
+
+    #optional
+
+    cd actions-runner/
+
+    ./run.sh
+
+    #required
+
+     docker start mlproj
+
+     docker ps -a
+
 
 ## 7. Setup github secrets:
 

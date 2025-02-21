@@ -3,9 +3,26 @@ import os
 import numpy as np
 import pandas as pd
 from laxProject.pipeline.prediction import PredictionPipeline
+# Import Prometheus client functions
+from prometheus_client import generate_latest, CONTENT_TYPE_LATEST, Counter, Summary
 
 
 app = Flask(__name__) # initializing a flask app
+
+# Example metrics: count total requests and measure request latency
+REQUEST_COUNT = Counter('request_count', 'Total number of requests', ['method', 'endpoint'])
+REQUEST_LATENCY = Summary('request_latency_seconds', 'Request latency', ['endpoint'])
+
+@app.before_request
+def before_request():
+    # You can add logic here to start a timer if desired
+    pass
+
+@app.after_request
+def after_request(response):
+    # Increment the request count for the given endpoint and method
+    REQUEST_COUNT.labels(method=request.method, endpoint=request.path).inc()
+    return response
 
 @app.route('/',methods=['GET'])  # route to display the home page
 def homePage():
@@ -50,6 +67,10 @@ def index():
     else:
         return render_template('index.html')
 
+# New endpoint for Prometheus to scrape metrics
+@app.route('/metrics')
+def metrics():
+    return generate_latest(), 200, {'Content-Type': CONTENT_TYPE_LATEST}
 
 if __name__ == "__main__":
 	# app.run(host="0.0.0.0", port = 8080, debug=True)
