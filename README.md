@@ -181,6 +181,10 @@ set MLFLOW_TRACKING_PASSWORD=Your-MlFlow-Password
 
     ECR_REPOSITORY_NAME = lax-model
 
+    EC2_HOST = Your public IP address
+
+    EC2_SSH_KEY = .pem file private key
+
 
 
 ## About MLflow 

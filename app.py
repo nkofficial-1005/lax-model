@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from laxProject.pipeline.prediction import PredictionPipeline
 # Import Prometheus client functions
-from prometheus_client import generate_latest, CONTENT_TYPE_LATEST, Counter, Summary
+from prometheus_client import generate_latest, CONTENT_TYPE_LATEST, Counter, Summary, Gauge, Histogram
 
 
 app = Flask(__name__) # initializing a flask app
@@ -12,6 +12,8 @@ app = Flask(__name__) # initializing a flask app
 # Example metrics: count total requests and measure request latency
 REQUEST_COUNT = Counter('request_count', 'Total number of requests', ['method', 'endpoint'])
 REQUEST_LATENCY = Summary('request_latency_seconds', 'Request latency', ['endpoint'])
+ERROR_COUNT = Counter("error_count", "Number of errors encountered") #new addition after prom
+PREDICTION_HIST = Histogram("prediction_distribution", "Distribution of wine quality predictions", buckets=[3,5,7,10]) #new addition after prom
 
 @app.before_request
 def before_request():
@@ -58,10 +60,14 @@ def index():
             obj = PredictionPipeline()
             predict = obj.predict(data)
 
+            predict_value = obj.predict(data)[0]
+            PREDICTION_HIST.observe(predict_value)
+
             return render_template('results.html', prediction = str(predict))
 
         except Exception as e:
             print('The Exception message is: ',e)
+            ERROR_COUNT.inc() #new addition after prom
             return 'something is wrong'
 
     else:
