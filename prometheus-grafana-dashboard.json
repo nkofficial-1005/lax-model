@@ -1,0 +1,163 @@
+{
+    "annotations": {
+      "list": []
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": null,
+    "iteration": 1678784000000,
+    "links": [],
+    "panels": [
+      {
+        "datasource": "Prometheus",
+        "fieldConfig": {
+          "defaults": {
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 2,
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "single"
+          }
+        },
+        "targets": [
+          {
+            "expr": "sum(rate(request_count_total[5m])) by (endpoint)",
+            "interval": "",
+            "legendFormat": "{{endpoint}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Request Count by Endpoint",
+        "type": "timeseries"
+      },
+      {
+        "datasource": "Prometheus",
+        "fieldConfig": {
+          "defaults": {
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "id": 4,
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "single"
+          }
+        },
+        "targets": [
+          {
+            "expr": "sum(rate(error_count_total[5m]))",
+            "interval": "",
+            "legendFormat": "Total Errors",
+            "refId": "A"
+          }
+        ],
+        "title": "Error Count",
+        "type": "timeseries"
+      },
+      {
+        "datasource": "Prometheus",
+        "fieldConfig": {
+          "defaults": {
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 9
+        },
+        "id": 6,
+        "options": {},
+        "targets": [
+          {
+            "expr": "sum(scrape_duration_seconds)",
+            "interval": "",
+            "legendFormat": "{{endpoint}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Total Scrape Duration Seconds",
+        "type": "timeseries"
+      },
+      {
+        "datasource": "Prometheus",
+        "fieldConfig": {
+          "defaults": {
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 24,
+          "x": 0,
+          "y": 18
+        },
+        "id": 8,
+        "options": {
+          "legend": {
+            "displayMode": "table",
+            "placement": "bottom"
+          }
+        },
+        "targets": [
+          {
+            "expr": "sum(rate(prediction_distribution_bucket[5m])) by (le)",
+            "interval": "",
+            "legendFormat": "Bucket: {{le}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Prediction Distribution Histogram",
+        "type": "timeseries"
+      }
+    ],
+    "refresh": "15s",
+    "schemaVersion": 30,
+    "style": "dark",
+    "tags": [
+      "wine",
+      "quality",
+      "elasticnet"
+    ],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Wine Quality Prediction Metrics",
+    "uid": "wine-quality-metrics",
+    "version": 1
+  }
+  
